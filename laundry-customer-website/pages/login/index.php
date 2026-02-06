@@ -32,7 +32,7 @@
           <h2 class="text-2xl sm:text-3xl font-bold mb-1 sm:mb-2 text-slate-800">Welcome Back!</h2>
           <p class="text-gray-500 text-sm sm:text-base">Login to manage your orders</p>
         </div>
-        <form action="login_process.php" method="POST">
+        <form id="loginForm">
           <div class="mb-4 sm:mb-5">
             <label class="block mb-1.5 sm:mb-2 font-semibold text-xs sm:text-sm text-slate-600">Email Address</label>
             <div class="relative">
@@ -53,7 +53,7 @@
             </label>
             <a href="#" class="text-sky-600 hover:text-sky-700 font-medium">Forgot password?</a>
           </div>
-          <button type="submit" class="btn btn-primary w-full text-base sm:text-lg shadow-lg shadow-sky-500/20">Login</button>
+          <button type="submit" id="loginBtn" class="btn btn-primary w-full text-base sm:text-lg shadow-lg shadow-sky-500/20">Login</button>
         </form>
         <div class="text-center mt-6 sm:mt-8 pt-4 sm:pt-6 border-t border-gray-100">
           <p class="text-gray-500 text-sm sm:text-base">Don't have an account? <a href="<?php echo $base_path; ?>/pages/signup/index.php" class="text-sky-600 hover:text-sky-700 font-bold">Sign up</a></p>
@@ -62,5 +62,47 @@
     </div>
   </div>
 </section>
+
+<script>
+document.getElementById('loginForm').addEventListener('submit', async function(e) {
+  e.preventDefault();
+  
+  const loginBtn = document.getElementById('loginBtn');
+  const formData = new FormData(this);
+  const data = Object.fromEntries(formData.entries());
+
+  loginBtn.disabled = true;
+  loginBtn.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i> Logging in...';
+
+  try {
+    const response = await fetch('https://laundry-backend-two.vercel.app/api/v1/website/login/', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(data)
+    });
+
+    const result = await response.json();
+
+    if (response.ok) {
+      // Store accessToken and user data as per provided response structure
+      localStorage.setItem('accessToken', result.accessToken);
+      localStorage.setItem('user', JSON.stringify(result.user));
+      
+      alert(result.message || 'Login successful!');
+      window.location.href = '../../index.php';
+    } else {
+      alert('Login failed: ' + (result.message || 'Invalid credentials'));
+    }
+  } catch (error) {
+    console.error('Error:', error);
+    alert('An error occurred. Please try again later.');
+  } finally {
+    loginBtn.disabled = false;
+    loginBtn.innerHTML = 'Login';
+  }
+});
+</script>
 
 <?php include '../../includes/footer.php'; ?>

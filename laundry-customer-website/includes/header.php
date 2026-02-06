@@ -57,7 +57,7 @@
         </button>
 
         <!-- Desktop Navigation -->
-        <ul class="hidden lg:flex gap-6 xl:gap-8 items-center">
+        <ul class="hidden lg:flex gap-6 xl:gap-8 items-center" id="navLinks">
           <li>
             <form action="#" method="GET" class="relative">
               <input type="text" placeholder="Search..." class="bg-gray-100 text-gray-700 px-4 py-2 pl-10 rounded-full focus:outline-none focus:ring-2 focus:ring-sky-500 w-40 xl:w-48 transition-all hover:bg-white hover:shadow-sm text-sm">
@@ -76,7 +76,7 @@
           <li>
             <a href="<?php echo $base_path; ?>/pages/contact/index.php" class="font-medium hover:text-sky-500 transition-colors text-sm xl:text-base <?php echo strpos($current_page, '/contact/') !== false ? 'text-sky-600 font-bold' : 'text-gray-600'; ?>">Contact</a>
           </li>
-          <li><a href="<?php echo $base_path; ?>/pages/login/index.php" class="btn btn-primary">Login</a></li>
+          <li id="authLinkDesktop"><a href="<?php echo $base_path; ?>/pages/login/index.php" class="btn btn-primary">Login</a></li>
         </ul>
       </nav>
 
@@ -86,7 +86,7 @@
           <input type="text" placeholder="Search..." class="bg-gray-100 text-gray-700 px-4 py-2 pl-10 rounded-full focus:outline-none focus:ring-2 focus:ring-sky-500 w-full transition-all">
           <i class="fas fa-search absolute left-3 top-2.5 text-gray-400"></i>
         </form>
-        <ul class="flex flex-col gap-3">
+        <ul class="flex flex-col gap-3" id="mobileNavLinks">
           <li>
             <a href="<?php echo $base_path; ?>/" class="block py-2 px-4 rounded-lg font-medium hover:bg-sky-50 hover:text-sky-500 transition-colors <?php echo $current_page == $base_path . '/index.php' ? 'text-sky-600 font-bold bg-sky-50' : 'text-gray-600'; ?>">Home</a>
           </li>
@@ -99,13 +99,60 @@
           <li>
             <a href="<?php echo $base_path; ?>/pages/contact/index.php" class="block py-2 px-4 rounded-lg font-medium hover:bg-sky-50 hover:text-sky-500 transition-colors <?php echo strpos($current_page, '/contact/') !== false ? 'text-sky-600 font-bold bg-sky-50' : 'text-gray-600'; ?>">Contact</a>
           </li>
-          <li class="mt-2"><a href="<?php echo $base_path; ?>/pages/login/index.php" class="btn btn-primary w-full justify-center">Login</a></li>
+          <li id="authLinkMobile"><a href="<?php echo $base_path; ?>/pages/login/index.php" class="btn btn-primary w-full justify-center">Login</a></li>
         </ul>
       </div>
     </div>
   </header>
 
   <script>
+    // Authentication Logic
+    document.addEventListener('DOMContentLoaded', function() {
+      const accessToken = localStorage.getItem('accessToken');
+      const user = JSON.parse(localStorage.getItem('user') || '{}');
+      const authLinkDesktop = document.getElementById('authLinkDesktop');
+      const authLinkMobile = document.getElementById('authLinkMobile');
+
+      if (accessToken && user && user.fullName) {
+        // Update Desktop Auth Link
+        authLinkDesktop.innerHTML = `
+          <div class="flex items-center gap-3 xl:gap-4 pl-4 border-l border-gray-100">
+            <div class="flex flex-col items-end">
+              <span class="text-xs xl:text-sm font-bold text-slate-800 line-clamp-1">${user.fullName}</span>
+              <button onclick="logout()" class="text-[10px] xl:text-xs text-red-500 hover:text-red-700 font-semibold cursor-pointer">Logout</button>
+            </div>
+            <div class="w-8 h-8 xl:w-10 xl:h-10 bg-sky-50 rounded-full flex items-center justify-center text-sky-600 border border-sky-100">
+              <i class="fas fa-user text-sm xl:text-base"></i>
+            </div>
+          </div>
+        `;
+
+        // Update Mobile Auth Link
+        authLinkMobile.innerHTML = `
+          <div class="flex items-center justify-between p-4 bg-sky-50 rounded-xl mt-2">
+            <div class="flex items-center gap-3">
+              <div class="w-10 h-10 bg-white rounded-full flex items-center justify-center text-sky-600 text-lg">
+                <i class="fas fa-user"></i>
+              </div>
+              <div>
+                <p class="font-bold text-slate-800 text-sm">${user.fullName}</p>
+                <p class="text-xs text-gray-500">${user.email}</p>
+              </div>
+            </div>
+            <button onclick="logout()" class="p-2 text-red-500 hover:bg-red-50 rounded-lg transition-colors cursor-pointer">
+              <i class="fas fa-sign-out-alt"></i>
+            </button>
+          </div>
+        `;
+      }
+    });
+
+    function logout() {
+      localStorage.removeItem('accessToken');
+      localStorage.removeItem('user');
+      window.location.reload();
+    }
+
     // Mobile menu toggle
     document.getElementById('mobile-menu-btn').addEventListener('click', function() {
       const mobileMenu = document.getElementById('mobile-menu');
