@@ -46,7 +46,7 @@
         <a href="<?php echo $base_path; ?>/" class="flex items-center gap-2 text-2xl font-extrabold text-sky-500">
           <i class="fas fa-soap"></i> FreshSpin
         </a>
-        <ul class="flex gap-8 items-center">
+        <ul class="flex gap-8 items-center" id="navLinks">
           <li>
             <form action="#" method="GET" class="relative">
               <input type="text" placeholder="Search..." class="bg-gray-100 text-gray-700 px-4 py-2 pl-10 rounded-full focus:outline-none focus:ring-2 focus:ring-sky-500 w-48 transition-all hover:bg-white hover:shadow-sm">
@@ -65,8 +65,36 @@
           <li>
             <a href="<?php echo $base_path; ?>/pages/contact/index.php" class="font-medium hover:text-sky-500 transition-colors <?php echo strpos($current_page, '/contact/') !== false ? 'text-sky-600 font-bold' : 'text-gray-600'; ?>">Contact</a>
           </li>
-          <li><a href="<?php echo $base_path; ?>/pages/login/index.php" class="btn btn-primary">Login</a></li>
+          <li id="authLink"><a href="<?php echo $base_path; ?>/pages/login/index.php" class="btn btn-primary">Login</a></li>
         </ul>
       </nav>
     </div>
   </header>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const token = localStorage.getItem('token');
+      const user = JSON.parse(localStorage.getItem('user') || '{}');
+      const authLink = document.getElementById('authLink');
+
+      if (token && user) {
+        authLink.innerHTML = `
+          <div class="flex items-center gap-4">
+            <div class="flex flex-col items-end">
+              <span class="text-sm font-bold text-slate-800">${user.fullName || 'User'}</span>
+              <button onclick="logout()" class="text-xs text-red-500 hover:text-red-700 font-semibold">Logout</button>
+            </div>
+            <div class="w-10 h-10 bg-sky-100 rounded-full flex items-center justify-center text-sky-600 border border-sky-200">
+              <i class="fas fa-user"></i>
+            </div>
+          </div>
+        `;
+      }
+    });
+
+    function logout() {
+      localStorage.removeItem('token');
+      localStorage.removeItem('user');
+      window.location.reload();
+    }
+  </script>
