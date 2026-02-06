@@ -7,9 +7,6 @@
           </div>
           <div>
             <h3 class="text-xl font-bold mb-6">Quick Links</h3>
-            <?php
-            $base_path = '/laundry-customer-website';
-            ?>
             <ul class="space-y-3">
               <li><a href="<?php echo $base_path; ?>/" class="text-gray-400 hover:text-white transition-colors">Home</a></li>
               <li><a href="<?php echo $base_path; ?>/pages/services/index.php" class="text-gray-400 hover:text-white transition-colors">Services</a></li>

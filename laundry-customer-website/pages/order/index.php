@@ -82,4 +82,16 @@
   </div>
 </section>
 
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  const userStr = localStorage.getItem('user');
+  if (userStr) {
+    const user = JSON.parse(userStr);
+    if (user.fullName) document.querySelector('input[name="name"]').value = user.fullName;
+    if (user.phone) document.querySelector('input[name="phone"]').value = user.phone;
+    if (user.address) document.querySelector('input[name="address1"]').value = user.address;
+  }
+});
+</script>
+
 <?php include '../../includes/footer.php'; ?>

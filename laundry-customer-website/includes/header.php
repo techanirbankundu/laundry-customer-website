@@ -37,7 +37,7 @@
 
 <body class="bg-slate-50 text-slate-900 min-h-screen flex flex-col">
   <?php
-  $base_path = '/laundry-customer-website';
+  $base_path = '/laundry-customer-website/laundry-customer-website';
   $current_page = $_SERVER['SCRIPT_NAME'];
   ?>
   <header class="bg-white/90 backdrop-blur-lg border-b border-gray-200 sticky top-0 z-50 py-4">
