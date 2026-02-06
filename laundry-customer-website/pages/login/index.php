@@ -75,7 +75,7 @@ document.getElementById('loginForm').addEventListener('submit', async function(e
   loginBtn.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i> Logging in...';
 
   try {
-    const response = await fetch('https://laundry-backend-two.vercel.app/api/v1/website/login/', {
+    const response = await fetch('https://laundry-backend-two.vercel.app/api/v1/website/login', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -91,13 +91,13 @@ document.getElementById('loginForm').addEventListener('submit', async function(e
       localStorage.setItem('user', JSON.stringify(result.user));
       
       alert(result.message || 'Login successful!');
-      window.location.href = '../../index.php';
+      window.location.href = '<?php echo $base_path; ?>/index.php';
     } else {
-      alert('Login failed: ' + (result.message || 'Invalid credentials'));
+      alert('Login failed: ' + (result.message || 'Invalid credentials. Please check your email and password.'));
     }
   } catch (error) {
     console.error('Error:', error);
-    alert('An error occurred. Please try again later.');
+    alert('An error occurred while connecting to the server. Please check your internet connection and try again.');
   } finally {
     loginBtn.disabled = false;
     loginBtn.innerHTML = 'Login';

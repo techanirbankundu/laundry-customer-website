@@ -108,6 +108,7 @@
   <script>
     // Authentication Logic
     document.addEventListener('DOMContentLoaded', function() {
+      const base_path = '<?php echo $base_path; ?>';
       const accessToken = localStorage.getItem('accessToken');
       const user = JSON.parse(localStorage.getItem('user') || '{}');
       const authLinkDesktop = document.getElementById('authLinkDesktop');
@@ -117,31 +118,36 @@
         // Update Desktop Auth Link
         authLinkDesktop.innerHTML = `
           <div class="flex items-center gap-3 xl:gap-4 pl-4 border-l border-gray-100">
-            <div class="flex flex-col items-end">
-              <span class="text-xs xl:text-sm font-bold text-slate-800 line-clamp-1">${user.fullName}</span>
-              <button onclick="logout()" class="text-[10px] xl:text-xs text-red-500 hover:text-red-700 font-semibold cursor-pointer">Logout</button>
-            </div>
-            <div class="w-8 h-8 xl:w-10 xl:h-10 bg-sky-50 rounded-full flex items-center justify-center text-sky-600 border border-sky-100">
+            <a href="${base_path}/pages/profile/index.php" class="flex flex-col items-end group">
+              <span class="text-xs xl:text-sm font-bold text-slate-800 line-clamp-1 group-hover:text-sky-500 transition-colors">${user.fullName}</span>
+              <button onclick="event.preventDefault(); logout()" class="text-[10px] xl:text-xs text-red-500 hover:text-red-700 font-semibold cursor-pointer">Logout</button>
+            </a>
+            <a href="${base_path}/pages/profile/index.php" class="w-8 h-8 xl:w-10 xl:h-10 bg-sky-50 rounded-full flex items-center justify-center text-sky-600 border border-sky-100 hover:bg-sky-100 transition-all">
               <i class="fas fa-user text-sm xl:text-base"></i>
-            </div>
+            </a>
           </div>
         `;
 
         // Update Mobile Auth Link
         authLinkMobile.innerHTML = `
-          <div class="flex items-center justify-between p-4 bg-sky-50 rounded-xl mt-2">
-            <div class="flex items-center gap-3">
-              <div class="w-10 h-10 bg-white rounded-full flex items-center justify-center text-sky-600 text-lg">
-                <i class="fas fa-user"></i>
-              </div>
-              <div>
-                <p class="font-bold text-slate-800 text-sm">${user.fullName}</p>
-                <p class="text-xs text-gray-500">${user.email}</p>
-              </div>
+          <div class="p-4 bg-sky-50 rounded-xl mt-2">
+            <div class="flex items-center justify-between">
+              <a href="${base_path}/pages/profile/index.php" class="flex items-center gap-3">
+                <div class="w-10 h-10 bg-white rounded-full flex items-center justify-center text-sky-600 text-lg">
+                  <i class="fas fa-user"></i>
+                </div>
+                <div>
+                  <p class="font-bold text-slate-800 text-sm">${user.fullName}</p>
+                  <p class="text-xs text-gray-500">${user.email}</p>
+                </div>
+              </a>
+              <button onclick="logout()" class="p-2 text-red-500 hover:bg-red-50 rounded-lg transition-colors cursor-pointer">
+                <i class="fas fa-sign-out-alt"></i>
+              </button>
             </div>
-            <button onclick="logout()" class="p-2 text-red-500 hover:bg-red-50 rounded-lg transition-colors cursor-pointer">
-              <i class="fas fa-sign-out-alt"></i>
-            </button>
+            <a href="${base_path}/pages/profile/index.php" class="block text-center mt-3 text-xs font-bold text-sky-600 hover:text-sky-700">
+              View Profile & Orders <i class="fas fa-chevron-right ml-1"></i>
+            </a>
           </div>
         `;
       }
