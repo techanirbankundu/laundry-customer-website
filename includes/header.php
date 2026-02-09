@@ -10,6 +10,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   <style type="text/tailwindcss">
     @layer components {
             .btn {
@@ -191,11 +192,29 @@
     });
 
     function logout() {
-      if (confirm('Are you sure you want to logout?')) {
-        localStorage.removeItem('accessToken');
-        localStorage.removeItem('user');
-        window.location.href = '<?php echo $base_path; ?>/index.php';
-      }
+      Swal.fire({
+        title: 'Logout?',
+        text: 'Are you sure you want to sign out of your account?',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#0ea5e9',
+        cancelButtonColor: '#ef4444',
+        confirmButtonText: 'Yes, logout',
+        cancelButtonText: 'Cancel',
+        background: '#ffffff',
+        borderRadius: '24px',
+        customClass: {
+          popup: 'rounded-3xl border border-gray-100 shadow-2xl',
+          confirmButton: 'rounded-xl font-bold px-6 py-3',
+          cancelButton: 'rounded-xl font-bold px-6 py-3'
+        }
+      }).then((result) => {
+        if (result.isConfirmed) {
+          localStorage.removeItem('accessToken');
+          localStorage.removeItem('user');
+          window.location.href = '<?php echo $base_path; ?>/index.php';
+        }
+      });
     }
 
     // Mobile menu toggle
