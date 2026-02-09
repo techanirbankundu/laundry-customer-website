@@ -1,12 +1,12 @@
-<?php 
+<?php
 define('STORE_ID', "03a9339c-638f-4d1e-96c8-74aa596fab81");
 include '../../includes/header.php'; ?>
 
-<section class="py-10 sm:py-12 lg:py-16 bg-gradient-to-b from-blue-50 to-white">
+<section class="py-10 sm:py-12 lg:py-14 bg-gradient-to-b from-blue-50 to-white">
   <div class="container mx-auto px-4 sm:px-6">
     <div class="max-w-6xl mx-auto">
       <div class="flex flex-col md:flex-row gap-8 items-start">
-        
+
         <!-- Sidebar: Profile Info -->
         <div class="w-full md:w-1/3">
           <div class="bg-white rounded-2xl shadow-xl p-6 sm:p-8 border border-gray-100 sticky top-24">
@@ -17,7 +17,7 @@ include '../../includes/header.php'; ?>
               <h2 id="profileName" class="text-2xl font-bold text-slate-800">Loading...</h2>
               <p id="profileEmail" class="text-gray-500 text-sm">Loading...</p>
             </div>
-            
+
             <div class="space-y-4 border-t border-gray-100 pt-6">
               <div class="flex items-start gap-3">
                 <div class="mt-1 w-8 h-8 bg-sky-50 rounded-lg flex items-center justify-center text-sky-500 shrink-0">
@@ -28,7 +28,7 @@ include '../../includes/header.php'; ?>
                   <p id="profilePhone" class="text-slate-700 font-medium">Loading...</p>
                 </div>
               </div>
-              
+
               <div class="flex items-start gap-3">
                 <div class="mt-1 w-8 h-8 bg-sky-50 rounded-lg flex items-center justify-center text-sky-500 shrink-0">
                   <i class="fas fa-map-marker-alt text-xs"></i>
@@ -80,47 +80,47 @@ include '../../includes/header.php'; ?>
 </section>
 
 <script>
-document.addEventListener('DOMContentLoaded', async function() {
-  const accessToken = localStorage.getItem('accessToken');
-  if (!accessToken) {
-    window.location.href = '../login/index.php';
-    return;
-  }
-
-  // Common fetch options
-  const fetchOptions = {
-    headers: {
-      'Authorization': `Bearer ${accessToken}`,
-      'Content-Type': 'application/json'
+  document.addEventListener('DOMContentLoaded', async function() {
+    const accessToken = localStorage.getItem('accessToken');
+    if (!accessToken) {
+      window.location.href = '../login/index.php';
+      return;
     }
-  };
 
-  // Fetch Profile
-  try {
-    const profileRes = await fetch('https://laundry-backend-two.vercel.app/api/v1/website/profile', fetchOptions);
-    const profileData = await profileRes.json();
-    
-    if (profileRes.ok) {
-      document.getElementById('profileName').innerText = profileData.user.fullName;
-      document.getElementById('profileEmail').innerText = profileData.user.email;
-      document.getElementById('profilePhone').innerText = profileData.user.phone || 'Not provided';
-      document.getElementById('profileAddress').innerText = profileData.user.address || 'No address saved';
-      document.getElementById('profileShop').innerText = profileData.customerProfile.shopId ? 'Main Laundry Store' : 'General';
+    // Common fetch options
+    const fetchOptions = {
+      headers: {
+        'Authorization': `Bearer ${accessToken}`,
+        'Content-Type': 'application/json'
+      }
+    };
+
+    // Fetch Profile
+    try {
+      const profileRes = await fetch('https://laundry-backend-two.vercel.app/api/v1/website/profile', fetchOptions);
+      const profileData = await profileRes.json();
+
+      if (profileRes.ok) {
+        document.getElementById('profileName').innerText = profileData.user.fullName;
+        document.getElementById('profileEmail').innerText = profileData.user.email;
+        document.getElementById('profilePhone').innerText = profileData.user.phone || 'Not provided';
+        document.getElementById('profileAddress').innerText = profileData.user.address || 'No address saved';
+        document.getElementById('profileShop').innerText = profileData.customerProfile.shopId ? 'Main Laundry Store' : 'General';
+      }
+    } catch (err) {
+      console.error('Profile fetch error:', err);
     }
-  } catch (err) {
-    console.error('Profile fetch error:', err);
-  }
 
-  // Fetch Orders
-  try {
-    const ordersRes = await fetch('https://laundry-backend-two.vercel.app/api/v1/website/orders', fetchOptions);
-    const orders = await ordersRes.json();
-    
-    const ordersContainer = document.getElementById('ordersContainer');
-    document.getElementById('orderCount').innerText = `${orders.length} Order${orders.length !== 1 ? 's' : ''}`;
+    // Fetch Orders
+    try {
+      const ordersRes = await fetch('https://laundry-backend-two.vercel.app/api/v1/website/orders', fetchOptions);
+      const orders = await ordersRes.json();
 
-    if (ordersRes.ok && orders.length > 0) {
-      ordersContainer.innerHTML = orders.map(order => `
+      const ordersContainer = document.getElementById('ordersContainer');
+      document.getElementById('orderCount').innerText = `${orders.length} Order${orders.length !== 1 ? 's' : ''}`;
+
+      if (ordersRes.ok && orders.length > 0) {
+        ordersContainer.innerHTML = orders.map(order => `
         <div class="p-4 sm:p-5 border border-gray-100 rounded-xl hover:border-sky-300 transition-all group bg-slate-50/50">
           <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
             <div>
@@ -141,8 +141,8 @@ document.addEventListener('DOMContentLoaded', async function() {
           </div>
         </div>
       `).join('');
-    } else {
-      ordersContainer.innerHTML = `
+      } else {
+        ordersContainer.innerHTML = `
         <div class="text-center py-20 bg-slate-50 rounded-2xl border-2 border-dashed border-gray-200">
           <div class="w-16 h-16 bg-white rounded-full flex items-center justify-center text-gray-300 mx-auto mb-4">
             <i class="fas fa-shopping-basket text-2xl"></i>
@@ -152,23 +152,29 @@ document.addEventListener('DOMContentLoaded', async function() {
           <a href="../order/index.php" class="btn btn-primary btn-sm">Place First Order</a>
         </div>
       `;
+      }
+    } catch (err) {
+      console.error('Orders fetch error:', err);
+      document.getElementById('ordersContainer').innerHTML = '<p class="text-red-500 text-center py-10">Failed to load order history.</p>';
     }
-  } catch (err) {
-    console.error('Orders fetch error:', err);
-    document.getElementById('ordersContainer').innerHTML = '<p class="text-red-500 text-center py-10">Failed to load order history.</p>';
-  }
-});
+  });
 
-function getStatusClass(status) {
-  switch (status) {
-    case 'PICKUP_PENDING': return 'bg-amber-100 text-amber-600';
-    case 'PICKED_UP': return 'bg-blue-100 text-blue-600';
-    case 'PROCESSING': return 'bg-sky-100 text-sky-600';
-    case 'COMPLETED': return 'bg-emerald-100 text-emerald-600';
-    case 'CANCELLED': return 'bg-red-100 text-red-600';
-    default: return 'bg-gray-100 text-gray-600';
+  function getStatusClass(status) {
+    switch (status) {
+      case 'PICKUP_PENDING':
+        return 'bg-amber-100 text-amber-600';
+      case 'PICKED_UP':
+        return 'bg-blue-100 text-blue-600';
+      case 'PROCESSING':
+        return 'bg-sky-100 text-sky-600';
+      case 'COMPLETED':
+        return 'bg-emerald-100 text-emerald-600';
+      case 'CANCELLED':
+        return 'bg-red-100 text-red-600';
+      default:
+        return 'bg-gray-100 text-gray-600';
+    }
   }
-}
 </script>
 
 <?php include '../../includes/footer.php'; ?>

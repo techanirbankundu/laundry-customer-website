@@ -1,4 +1,4 @@
-<?php 
+<?php
 define('STORE_ID', "03a9339c-638f-4d1e-96c8-74aa596fab81");
 include '../../includes/header.php'; ?>
 
@@ -12,7 +12,7 @@ include '../../includes/header.php'; ?>
           <div class="w-16 h-16 lg:w-20 lg:h-20 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center mx-auto mb-4 lg:mb-6">
             <i class="fas fa-user-plus text-xl lg:text-3xl"></i>
           </div>
-          <h2 class="text-2xl lg:text-4xl font-bold mb-3 lg:mb-4">Join FreshSpin</h2>
+          <h2 class="text-2xl lg:text-3xl font-bold mb-3 lg:mb-4">Join FreshSpin</h2>
           <p class="text-sky-100 text-sm lg:text-lg leading-relaxed">Create an account today and experience laundry freedom.</p>
           <div class="mt-6 lg:mt-8 flex justify-center gap-2">
             <div class="w-2 h-2 rounded-full bg-white opacity-50"></div>
@@ -31,7 +31,7 @@ include '../../includes/header.php'; ?>
           </div>
         </div>
         <div class="text-center mb-6 sm:mb-8">
-          <h2 class="text-2xl sm:text-3xl font-bold mb-1 sm:mb-2 text-slate-800">Create Account</h2>
+          <h2 class="text-2xl sm:text-2xl font-bold mb-1 sm:mb-2 text-slate-800">Create Account</h2>
           <p class="text-gray-500 text-sm sm:text-base">Join us for premium laundry services</p>
         </div>
         <form id="signupForm">
@@ -96,55 +96,55 @@ include '../../includes/header.php'; ?>
 </section>
 
 <script>
-document.getElementById('signupForm').addEventListener('submit', async function(e) {
-  e.preventDefault();
-  
-  const submitBtn = document.getElementById('submitBtn');
-  const password = document.getElementById('password').value;
-  const confirmPassword = document.getElementById('confirm_password').value;
-  
-  if (password !== confirmPassword) {
-    alert('Passwords do not match!');
-    return;
-  }
-  
-  const formData = new FormData(this);
-  const data = Object.fromEntries(formData.entries());
-  
-  // Add shopId
-  data.shopId = "<?php echo STORE_ID; ?>";
-  
-  // Remove confirm_password before sending
-  delete data.confirm_password;
+  document.getElementById('signupForm').addEventListener('submit', async function(e) {
+    e.preventDefault();
 
-  submitBtn.disabled = true;
-  submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i> Creating Account...';
+    const submitBtn = document.getElementById('submitBtn');
+    const password = document.getElementById('password').value;
+    const confirmPassword = document.getElementById('confirm_password').value;
 
-  try {
-    const response = await fetch('https://laundry-backend-two.vercel.app/api/v1/website/register', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(data)
-    });
-
-    const result = await response.json();
-
-    if (response.ok) {
-      alert('Registration successful! Please login.');
-      window.location.href = '../login/index.php';
-    } else {
-      alert('Registration failed: ' + (result.message || 'Unknown error'));
+    if (password !== confirmPassword) {
+      alert('Passwords do not match!');
+      return;
     }
-  } catch (error) {
-    console.error('Error:', error);
-    alert('An error occurred. Please try again later.');
-  } finally {
-    submitBtn.disabled = false;
-    submitBtn.innerHTML = 'Sign Up';
-  }
-});
+
+    const formData = new FormData(this);
+    const data = Object.fromEntries(formData.entries());
+
+    // Add shopId
+    data.shopId = "<?php echo STORE_ID; ?>";
+
+    // Remove confirm_password before sending
+    delete data.confirm_password;
+
+    submitBtn.disabled = true;
+    submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i> Creating Account...';
+
+    try {
+      const response = await fetch('https://laundry-backend-two.vercel.app/api/v1/website/register', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+      });
+
+      const result = await response.json();
+
+      if (response.ok) {
+        alert('Registration successful! Please login.');
+        window.location.href = '../login/index.php';
+      } else {
+        alert('Registration failed: ' + (result.message || 'Unknown error'));
+      }
+    } catch (error) {
+      console.error('Error:', error);
+      alert('An error occurred. Please try again later.');
+    } finally {
+      submitBtn.disabled = false;
+      submitBtn.innerHTML = 'Sign Up';
+    }
+  });
 </script>
 
 <?php include '../../includes/footer.php'; ?>

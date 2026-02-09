@@ -10,7 +10,7 @@
           <div class="w-16 h-16 lg:w-20 lg:h-20 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center mx-auto mb-4 lg:mb-6">
             <i class="fas fa-soap text-2xl lg:text-4xl"></i>
           </div>
-          <h2 class="text-2xl lg:text-4xl font-bold mb-3 lg:mb-4">FreshSpin Laundry</h2>
+          <h2 class="text-2xl lg:text-3xl font-bold mb-3 lg:mb-4">FreshSpin Laundry</h2>
           <p class="text-sky-100 text-sm lg:text-lg leading-relaxed">Premium laundry services delivered right to your doorstep.</p>
           <div class="mt-6 lg:mt-8 flex justify-center gap-2">
             <div class="w-2 h-2 rounded-full bg-white opacity-50"></div>
@@ -29,7 +29,7 @@
           </div>
         </div>
         <div class="text-center mb-6 sm:mb-8">
-          <h2 class="text-2xl sm:text-3xl font-bold mb-1 sm:mb-2 text-slate-800">Welcome Back!</h2>
+          <h2 class="text-2xl sm:text-2xl font-bold mb-1 sm:mb-2 text-slate-800">Welcome Back!</h2>
           <p class="text-gray-500 text-sm sm:text-base">Login to manage your orders</p>
         </div>
         <form id="loginForm">
@@ -64,45 +64,45 @@
 </section>
 
 <script>
-document.getElementById('loginForm').addEventListener('submit', async function(e) {
-  e.preventDefault();
-  
-  const loginBtn = document.getElementById('loginBtn');
-  const formData = new FormData(this);
-  const data = Object.fromEntries(formData.entries());
+  document.getElementById('loginForm').addEventListener('submit', async function(e) {
+    e.preventDefault();
 
-  loginBtn.disabled = true;
-  loginBtn.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i> Logging in...';
+    const loginBtn = document.getElementById('loginBtn');
+    const formData = new FormData(this);
+    const data = Object.fromEntries(formData.entries());
 
-  try {
-    const response = await fetch('https://laundry-backend-two.vercel.app/api/v1/website/login', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(data)
-    });
+    loginBtn.disabled = true;
+    loginBtn.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i> Logging in...';
 
-    const result = await response.json();
+    try {
+      const response = await fetch('https://laundry-backend-two.vercel.app/api/v1/website/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+      });
 
-    if (response.ok) {
-      // Store accessToken and user data as per provided response structure
-      localStorage.setItem('accessToken', result.accessToken);
-      localStorage.setItem('user', JSON.stringify(result.user));
-      
-      alert(result.message || 'Login successful!');
-      window.location.href = '<?php echo $base_path; ?>/index.php';
-    } else {
-      alert('Login failed: ' + (result.message || 'Invalid credentials. Please check your email and password.'));
+      const result = await response.json();
+
+      if (response.ok) {
+        // Store accessToken and user data as per provided response structure
+        localStorage.setItem('accessToken', result.accessToken);
+        localStorage.setItem('user', JSON.stringify(result.user));
+
+        alert(result.message || 'Login successful!');
+        window.location.href = '<?php echo $base_path; ?>/index.php';
+      } else {
+        alert('Login failed: ' + (result.message || 'Invalid credentials. Please check your email and password.'));
+      }
+    } catch (error) {
+      console.error('Error:', error);
+      alert('An error occurred while connecting to the server. Please check your internet connection and try again.');
+    } finally {
+      loginBtn.disabled = false;
+      loginBtn.innerHTML = 'Login';
     }
-  } catch (error) {
-    console.error('Error:', error);
-    alert('An error occurred while connecting to the server. Please check your internet connection and try again.');
-  } finally {
-    loginBtn.disabled = false;
-    loginBtn.innerHTML = 'Login';
-  }
-});
+  });
 </script>
 
 <?php include '../../includes/footer.php'; ?>

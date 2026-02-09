@@ -1,15 +1,15 @@
 <?php include '../../includes/header.php'; ?>
 
-<section class="py-10 sm:py-12 lg:py-16 bg-gradient-to-b from-blue-50 to-white">
+<section class="py-10 sm:py-12 lg:py-14 bg-gradient-to-b from-blue-50 to-white">
   <div class="container mx-auto px-4 sm:px-6 text-center">
-    <h1 class="text-3xl sm:text-4xl lg:text-5xl font-bold mb-2 sm:mb-4">Get in Touch</h1>
-    <p class="text-gray-600 text-sm sm:text-base lg:text-lg">We're here to help with any questions or concerns</p>
+    <h1 class="text-3xl sm:text-4xl lg:text-4xl font-bold mb-2 sm:mb-4">Get in Touch</h1>
+    <p class="text-gray-600 text-sm sm:text-base lg:text-base">We're here to help with any questions or concerns</p>
   </div>
 </section>
 
-<section class="py-12 sm:py-16 lg:py-20">
+<section class="py-10 sm:py-14 lg:py-16">
   <div class="container mx-auto px-4 sm:px-6">
-    <div class="grid lg:grid-cols-2 gap-8 sm:gap-12 lg:gap-16 items-start">
+    <div class="grid lg:grid-cols-2 gap-8 sm:gap-10 lg:gap-12 items-start">
 
       <!-- Contact Info -->
       <div>

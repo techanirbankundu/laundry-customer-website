@@ -25,11 +25,11 @@
             }
 
             .card {
-                @apply bg-white rounded-xl p-4 sm:p-6 lg:p-8 border border-gray-200 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:border-sky-500;
+                @apply bg-white rounded-xl p-4 sm:p-6 lg:p-7 border border-gray-200 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:border-sky-500;
             }
 
             .service-icon {
-                @apply w-12 h-12 sm:w-14 sm:h-14 lg:w-16 lg:h-16 bg-sky-100 rounded-full flex items-center justify-center text-sky-500 text-xl sm:text-2xl lg:text-3xl mb-4 sm:mb-6;
+                @apply w-12 h-12 sm:w-14 sm:h-14 lg:w-14 lg:h-14 bg-sky-100 rounded-full flex items-center justify-center text-sky-500 text-xl sm:text-2xl lg:text-2xl mb-4 sm:mb-6;
             }
 
             .container-responsive {
@@ -49,9 +49,11 @@
   <header class="bg-white/90 backdrop-blur-lg border-b border-gray-200 sticky top-0 z-50 py-3 sm:py-4">
     <div class="container mx-auto px-4 sm:px-6">
       <nav class="flex justify-between items-center">
-        <a href="<?php echo $base_path; ?>/" class="flex items-center gap-2 text-xl sm:text-2xl font-extrabold text-sky-500">
-          <i class="fas fa-soap"></i> FreshSpin
-        </a>
+        <div class="flex-1 flex items-center">
+          <a href="<?php echo $base_path; ?>/" class="flex items-center gap-2 text-xl sm:text-2xl font-extrabold text-sky-500">
+            <i class="fas fa-soap"></i> <span>FreshSpin Laundry</span>
+          </a>
+        </div>
 
         <!-- Mobile Menu Button -->
         <button id="mobile-menu-btn" class="lg:hidden p-2 text-gray-600 hover:text-sky-500 focus:outline-none transition-colors">
@@ -59,7 +61,7 @@
         </button>
 
         <!-- Desktop Navigation -->
-        <ul class="hidden lg:flex gap-6 xl:gap-8 items-center" id="navLinks">
+        <ul class="hidden lg:flex gap-6 xl:gap-8 items-center ml-auto" id="navLinks">
           <li>
             <form action="#" method="GET" class="relative group">
               <input type="text" placeholder="Search services..." class="bg-gray-100 text-gray-700 px-4 py-2 pl-10 rounded-full focus:outline-none focus:ring-2 focus:ring-sky-500 w-40 xl:w-48 transition-all hover:bg-gray-200/50 focus:bg-white focus:shadow-sm text-sm border border-transparent focus:border-sky-100">
@@ -78,7 +80,13 @@
           <li>
             <a href="<?php echo $base_path; ?>/pages/contact/index.php" class="font-medium hover:text-sky-500 transition-colors text-sm xl:text-base <?php echo strpos($current_page, '/contact/') !== false ? 'text-sky-600 font-bold' : 'text-gray-600'; ?>">Contact</a>
           </li>
-          <li id="authLinkDesktop"><a href="<?php echo $base_path; ?>/pages/login/index.php" class="btn btn-primary">Login</a></li>
+          <li class="flex items-center gap-3">
+            <span class="font-medium text-gray-700"><?php echo $user['name'] ?? 'Guest' ?></span>
+            <div class="w-8 h-8 rounded-full bg-sky-100 flex items-center justify-center text-sky-500">
+              <i class="fas fa-user"></i>
+            </div>
+          </li>
+          <li id="authLinkDesktop"><a href="<?php echo $base_path; ?>/pages/login/index.php" class="btn btn-primary"><?php echo isset($user['name']) ? 'Logout' : 'Login' ?></a></li>
         </ul>
       </nav>
 
@@ -161,7 +169,7 @@
     });
 
     function logout() {
-      if(confirm('Are you sure you want to logout?')) {
+      if (confirm('Are you sure you want to logout?')) {
         localStorage.removeItem('accessToken');
         localStorage.removeItem('user');
         window.location.href = '<?php echo $base_path; ?>/index.php';
@@ -171,12 +179,12 @@
     // Mobile menu toggle
     const mobileMenuBtn = document.getElementById('mobile-menu-btn');
     const mobileMenu = document.getElementById('mobile-menu');
-    
+
     if (mobileMenuBtn && mobileMenu) {
       mobileMenuBtn.addEventListener('click', function() {
         const icon = this.querySelector('i');
         mobileMenu.classList.toggle('hidden');
-        
+
         if (mobileMenu.classList.contains('hidden')) {
           icon.classList.replace('fa-times', 'fa-bars');
           this.classList.remove('bg-gray-100');
