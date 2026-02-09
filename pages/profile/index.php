@@ -317,9 +317,6 @@ include '../../includes/header.php'; ?>
                 ${data.items.map(item => `
                   <div class="flex items-center justify-between p-3 bg-slate-50 rounded-xl border border-slate-100">
                     <div class="flex items-center gap-3">
-                      <div class="w-10 h-10 bg-white rounded-lg flex items-center justify-center text-sky-500 shadow-sm border border-slate-100">
-                        <i class="fas fa-tshirt"></i>
-                      </div>
                       <div>
                         <p class="text-sm font-bold text-slate-800">${item.product.name}</p>
                         <p class="text-xs text-gray-500">${item.service.name} • ${item.quantity} Unit(s)</p>
@@ -401,6 +398,18 @@ include '../../includes/header.php'; ?>
       default:
         return 'bg-gray-100 text-gray-600';
     }
+  }
+
+  function getIcon(name) {
+    name = name.toLowerCase();
+    if (name.includes('shirt') || name.includes('tshirt') || name.includes('top')) return 'fas fa-tshirt';
+    if (name.includes('pant') || name.includes('trouser') || name.includes('jeans')) return 'fas fa-walking';
+    if (name.includes('suit') || name.includes('coat') || name.includes('blazer')) return 'fas fa-user-tie';
+    if (name.includes('saree') || name.includes('ethnic') || name.includes('dress')) return 'fas fa-female';
+    if (name.includes('wash') || name.includes('iron')) return 'fas fa-soap';
+    if (name.includes('dry')) return 'fas fa-wind';
+    if (name.includes('household') || name.includes('bed') || name.includes('blanket')) return 'fas fa-bed';
+    return 'fas fa-box';
   }
 
   // OTP Verification Logic
