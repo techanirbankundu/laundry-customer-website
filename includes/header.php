@@ -33,7 +33,7 @@
             }
 
             .container-responsive {
-                @apply container mx-auto px-4 sm:px-6 lg:px-10 xl:px-12 max-w-6xl xl:max-w-[1320px] 2xl:max-w-[1440px];
+                @apply container mx-auto px-4 sm:px-6 lg:px-12 xl:px-2 max-w-6xl xl:max-w-[1360px] 2xl:max-w-[1440px];
             }
         }
     </style>
@@ -46,8 +46,8 @@
   $current_page = $_SERVER['SCRIPT_NAME'];
   $is_home = $current_page == $base_path . '/index.php' || $current_page == $base_path . '/';
   ?>
-  <header class="bg-white/90 backdrop-blur-lg border-b border-gray-200 sticky top-0 z-50 py-3 sm:py-4">
-    <div class="container mx-auto px-4 sm:px-6 lg:px-10 xl:px-12 max-w-6xl xl:max-w-[1320px] 2xl:max-w-[1440px]">
+  <header class="bg-white/90 backdrop-blur-lg border-b border-gray-200 sticky top-0 z-50 py-1 sm:py-2 xl:py-3 cursor-default">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-12 xl:px-2 max-w-6xl xl:max-w-[1360px] 2xl:max-w-[1440px]">
       <nav class="flex justify-between items-center">
         <div class="flex-1 flex items-center">
           <a href="<?php echo $base_path; ?>/" class="flex items-center gap-2 text-xl sm:text-2xl font-extrabold text-sky-500">
@@ -61,13 +61,7 @@
         </button>
 
         <!-- Desktop Navigation -->
-        <ul class="hidden lg:flex gap-6 xl:gap-8 items-center ml-auto" id="navLinks">
-          <li>
-            <form action="#" method="GET" class="relative group">
-              <input type="text" placeholder="Search services..." class="bg-gray-100 text-gray-700 px-4 py-2 pl-10 rounded-full focus:outline-none focus:ring-2 focus:ring-sky-500 w-40 xl:w-48 transition-all hover:bg-gray-200/50 focus:bg-white focus:shadow-sm text-sm border border-transparent focus:border-sky-100">
-              <i class="fas fa-search absolute left-3 top-2.5 text-gray-400 group-focus-within:text-sky-500 transition-colors"></i>
-            </form>
-          </li>
+        <ul class="hidden lg:flex gap-4 xl:gap-6 items-center ml-auto" id="navLinks">
           <li>
             <a href="<?php echo $base_path; ?>/" class="font-medium hover:text-sky-500 transition-colors text-sm xl:text-base <?php echo $is_home ? 'text-sky-600 font-bold' : 'text-gray-600'; ?>">Home</a>
           </li>
@@ -124,18 +118,52 @@
         // Get initials for profile placeholder
         const initials = user.fullName.split(' ').map(n => n[0]).join('').toUpperCase().substring(0, 2);
 
-        // Update Desktop Auth Link
+        // Update Desktop Auth Link with Dropdown
         authLinkDesktop.innerHTML = `
-          <div class="flex items-center gap-3 xl:gap-4 pl-4 border-l border-gray-200">
-            <div class="flex flex-col items-end">
-              <a href="${base_path}/pages/profile/index.php" class="text-xs xl:text-sm font-bold text-slate-800 line-clamp-1 hover:text-sky-500 transition-colors">${user.fullName}</a>
-              <button onclick="logout()" class="text-[10px] xl:text-xs text-red-500 hover:text-red-700 font-semibold cursor-pointer outline-none">Logout</button>
+          <div class="relative">
+            <button id="user-menu-btn" class="flex items-center gap-3 xl:gap-4 pl-4 border-l border-gray-200 focus:outline-none cursor-pointer group/user">
+              <div class="flex flex-col items-end">
+                <span class="text-xs xl:text-sm font-bold text-slate-800 line-clamp-1 group-hover/user:text-sky-500 transition-colors">${user.fullName}</span>
+              </div>
+              <div class="w-9 h-9 xl:w-10 xl:h-10 bg-sky-50 rounded-full flex items-center justify-center text-sky-600 border border-sky-100 group-hover/user:border-sky-300 transition-all overflow-hidden">
+                ${user.avatar ? `<img src="${user.avatar}" class="w-full h-full object-cover">` : `<span class="text-xs xl:text-sm font-bold">${initials}</span>`}
+              </div>
+            </button>
+
+            <div id="user-dropdown" class="hidden absolute right-0 mt-4 w-48 bg-white rounded-2xl shadow-xl border border-gray-100 py-2 z-50 origin-top-right animate-in fade-in zoom-in duration-200">
+              <div class="px-4 py-2 border-b border-gray-50 mb-1">
+                <p class="text-[10px] font-bold text-gray-400 uppercase tracking-widest">Manage Account</p>
+              </div>
+              <a href="${base_path}/pages/profile/index.php" class="flex items-center gap-3 px-4 py-2.5 text-sm text-gray-700 hover:bg-sky-50 hover:text-sky-600 transition-colors">
+                <i class="fas fa-user-circle text-gray-400 w-4"></i> My Profile
+              </a>
+              <a href="${base_path}/pages/profile/index.php" class="flex items-center gap-3 px-4 py-2.5 text-sm text-gray-700 hover:bg-sky-50 hover:text-sky-600 transition-colors">
+                <i class="fas fa-shopping-bag text-gray-400 w-4"></i> My Orders
+              </a>
+              <div class="h-px bg-gray-100 my-1 mx-4"></div>
+              <button onclick="logout()" class="flex items-center gap-3 px-4 py-2.5 text-sm text-red-600 hover:bg-red-50 w-full text-left transition-colors font-semibold">
+                <i class="fas fa-sign-out-alt w-4"></i> Logout
+              </button>
             </div>
-            <a href="${base_path}/pages/profile/index.php" class="w-9 h-9 xl:w-11 xl:h-11 bg-sky-50 rounded-full flex items-center justify-center text-sky-600 border border-sky-100 hover:bg-sky-100 hover:shadow-sm transition-all overflow-hidden">
-              ${user.avatar ? `<img src="${user.avatar}" class="w-full h-full object-cover">` : `<span class="text-xs xl:text-sm font-bold">${initials}</span>`}
-            </a>
           </div>
         `;
+
+        // Toggle logic
+        const userMenuBtn = document.getElementById('user-menu-btn');
+        const userDropdown = document.getElementById('user-dropdown');
+
+        if (userMenuBtn && userDropdown) {
+          userMenuBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            userDropdown.classList.toggle('hidden');
+          });
+
+          document.addEventListener('click', (e) => {
+            if (!userDropdown.classList.contains('hidden') && !userDropdown.contains(e.target)) {
+              userDropdown.classList.add('hidden');
+            }
+          });
+        }
 
         // Update Mobile Auth Link
         authLinkMobile.innerHTML = `
