@@ -33,7 +33,7 @@
             }
 
             .container-responsive {
-                @apply container mx-auto px-4 sm:px-6;
+                @apply container mx-auto px-4 sm:px-6 lg:px-10 xl:px-12 max-w-6xl xl:max-w-[1320px] 2xl:max-w-[1440px];
             }
         }
     </style>
@@ -47,7 +47,7 @@
   $is_home = $current_page == $base_path . '/index.php' || $current_page == $base_path . '/';
   ?>
   <header class="bg-white/90 backdrop-blur-lg border-b border-gray-200 sticky top-0 z-50 py-3 sm:py-4">
-    <div class="container mx-auto px-4 sm:px-6">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-10 xl:px-12 max-w-6xl xl:max-w-[1320px] 2xl:max-w-[1440px]">
       <nav class="flex justify-between items-center">
         <div class="flex-1 flex items-center">
           <a href="<?php echo $base_path; ?>/" class="flex items-center gap-2 text-xl sm:text-2xl font-extrabold text-sky-500">
@@ -79,12 +79,6 @@
           </li>
           <li>
             <a href="<?php echo $base_path; ?>/pages/contact/index.php" class="font-medium hover:text-sky-500 transition-colors text-sm xl:text-base <?php echo strpos($current_page, '/contact/') !== false ? 'text-sky-600 font-bold' : 'text-gray-600'; ?>">Contact</a>
-          </li>
-          <li class="flex items-center gap-3">
-            <span class="font-medium text-gray-700"><?php echo $user['name'] ?? 'Guest' ?></span>
-            <div class="w-8 h-8 rounded-full bg-sky-100 flex items-center justify-center text-sky-500">
-              <i class="fas fa-user"></i>
-            </div>
           </li>
           <li id="authLinkDesktop"><a href="<?php echo $base_path; ?>/pages/login/index.php" class="btn btn-primary"><?php echo isset($user['name']) ? 'Logout' : 'Login' ?></a></li>
         </ul>

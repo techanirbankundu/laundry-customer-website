@@ -572,8 +572,8 @@ include '../../includes/header.php'; ?>
         const result = await response.json();
 
         if (response.ok) {
-          document.querySelector('.container-responsive').innerHTML = `
-          <div class="max-w-3xl mx-auto py-20 text-center animate-fade-in">
+          document.querySelector('.container-responsive').parentElement.innerHTML = `
+          <div class="max-w-3xl mx-auto py-20 px-4 text-center animate-fade-in">
             <div class="w-24 h-24 bg-green-500 text-white rounded-[40px] flex items-center justify-center mx-auto mb-10 text-4xl shadow-xl">
               <i class="fas fa-check"></i>
             </div>

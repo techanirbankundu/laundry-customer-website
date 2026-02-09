@@ -3,7 +3,7 @@ define('STORE_ID', "03a9339c-638f-4d1e-96c8-74aa596fab81");
 include '../../includes/header.php'; ?>
 
 <section class="py-10 sm:py-12 lg:py-14 bg-gradient-to-b from-blue-50 to-white">
-  <div class="container mx-auto px-4 sm:px-6">
+  <div class="container mx-auto px-4 sm:px-6 lg:px-10 xl:px-12 max-w-6xl xl:max-w-[1320px] 2xl:max-w-[1440px]">
     <div class="max-w-6xl mx-auto">
       <div class="flex flex-col md:flex-row gap-8 items-start">
 

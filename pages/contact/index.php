@@ -1,14 +1,14 @@
 <?php include '../../includes/header.php'; ?>
 
 <section class="py-10 sm:py-12 lg:py-14 bg-gradient-to-b from-blue-50 to-white">
-  <div class="container mx-auto px-4 sm:px-6 text-center">
+  <div class="container mx-auto px-4 sm:px-6 lg:px-10 xl:px-12 max-w-6xl xl:max-w-[1320px] 2xl:max-w-[1440px] text-center">
     <h1 class="text-3xl sm:text-4xl lg:text-4xl font-bold mb-2 sm:mb-4">Get in Touch</h1>
     <p class="text-gray-600 text-sm sm:text-base lg:text-base">We're here to help with any questions or concerns</p>
   </div>
 </section>
 
 <section class="py-10 sm:py-14 lg:py-16">
-  <div class="container mx-auto px-4 sm:px-6">
+  <div class="container mx-auto px-4 sm:px-6 lg:px-10 xl:px-12 max-w-6xl xl:max-w-[1320px] 2xl:max-w-[1440px]">
     <div class="grid lg:grid-cols-2 gap-8 sm:gap-10 lg:gap-12 items-start">
 
       <!-- Contact Info -->

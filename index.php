@@ -1,21 +1,21 @@
 <?php include 'includes/header.php'; ?>
 
-<section class="relative py-10 sm:py-14 lg:py-24 overflow-hidden active">
+<section class="relative py-10 sm:py-12 lg:py-14 overflow-hidden active">
   <!-- Background Image -->
   <div class="absolute inset-0 bg-cover bg-center" style="background-image: url('<?php echo $base_path; ?>/images/laundry-hero-bg.png');"></div>
   <!-- Gradient Overlay: Solid white on left for text, transparent on right for image -->
   <div class="absolute inset-0 bg-gradient-to-r from-white via-white/90 to-white/70 lg:to-transparent"></div>
 
-  <div class="container mx-auto px-4 sm:px-6 relative z-10">
+  <div class="container mx-auto px-4 sm:px-6 lg:px-10 xl:px-12 max-w-6xl xl:max-w-[1320px] 2xl:max-w-[1440px] relative z-10">
     <div class="flex flex-col lg:flex-row items-center gap-8 lg:gap-12">
       <div class="lg:w-1/2 text-center lg:text-left z-10">
         <div class="inline-block px-3 py-1.5 sm:px-4 sm:py-2 bg-sky-100 text-sky-600 rounded-full text-xs sm:text-sm font-semibold mb-4 sm:mb-6 animate-fade-in-up">
           <i class="fas fa-star mr-1 sm:mr-2"></i> #1 Rated Laundry Service
         </div>
-        <h1 class="text-3xl sm:text-4xl md:text-5xl lg:text-5xl xl:text-5xl font-bold mb-4 sm:mb-6 bg-gradient-to-r from-slate-900 to-sky-600 bg-clip-text text-transparent leading-tight">
+        <h1 class="text-3xl sm:text-4xl md:text-5xl lg:text-4xl xl:text-5xl font-bold mb-4 sm:mb-6 bg-gradient-to-r from-slate-900 to-sky-600 bg-clip-text text-transparent leading-tight">
           Fresh Clothes,<br>Free Time.
         </h1>
-        <p class="text-base sm:text-lg md:text-lg text-gray-600 mb-6 sm:mb-10 leading-relaxed max-w-lg mx-auto lg:mx-0">
+        <p class="text-base sm:text-lg md:text-lg lg:text-base xl:text-lg text-gray-600 mb-6 sm:mb-10 leading-relaxed max-w-lg mx-auto lg:mx-0">
           Experience the ultimate convenience with our door-to-door laundry & dry cleaning service. We treat your clothes with the care they deserve.
         </p>
         <div class="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center lg:justify-start">
@@ -37,10 +37,10 @@
           </div>
         </div>
       </div>
-      <div class="lg:w-1/2 relative lg:h-[500px] flex items-center justify-center mt-8 lg:mt-0">
+      <div class="lg:w-1/2 relative lg:h-[400px] flex items-center justify-center mt-8 lg:mt-0">
         <!-- Abstract Decorative Elements -->
-        <div class="absolute top-0 right-0 w-48 sm:w-72 lg:w-96 h-48 sm:h-72 lg:h-96 bg-sky-200/30 rounded-full blur-3xl -z-10 animate-pulse"></div>
-        <div class="absolute bottom-0 left-0 sm:left-10 w-36 sm:w-56 lg:w-72 h-36 sm:h-56 lg:h-72 bg-indigo-200/30 rounded-full blur-3xl -z-10 animate-pulse delay-700"></div>
+        <div class="absolute top-0 right-0 w-48 sm:w-72 lg:w-80 h-48 sm:h-72 lg:h-80 bg-sky-200/30 rounded-full blur-3xl -z-10 animate-pulse"></div>
+        <div class="absolute bottom-0 left-0 sm:left-10 w-36 sm:w-56 lg:w-64 h-36 sm:h-56 lg:h-64 bg-indigo-200/30 rounded-full blur-3xl -z-10 animate-pulse delay-700"></div>
 
         <!-- Main Visual Card -->
         <div class="relative bg-sky-50/90 backdrop-blur-xl border border-sky-200 p-4 sm:p-6 lg:p-8 rounded-2xl sm:rounded-3xl shadow-2xl w-full max-w-sm sm:max-w-md transform sm:rotate-2 hover:rotate-0 transition-all duration-500">
@@ -80,8 +80,8 @@
   </div>
 </section>
 
-<section class="py-12 sm:py-14 lg:py-16">
-  <div class="container mx-auto px-4 sm:px-6">
+<section class="py-10 sm:py-12 lg:py-14">
+  <div class="container mx-auto px-4 sm:px-6 lg:px-10 xl:px-12 max-w-6xl xl:max-w-[1320px] 2xl:max-w-[1440px]">
     <div class="text-center mb-8 sm:mb-12">
       <h2 class="text-2xl sm:text-3xl lg:text-4xl font-bold mb-3 sm:mb-4">Why Choose FreshSpin?</h2>
       <p class="text-gray-600 text-sm sm:text-base">We treat your clothes with the care they deserve</p>
@@ -106,8 +106,8 @@
   </div>
 </section>
 
-<section class="py-12 sm:py-14 lg:py-16 bg-blue-50">
-  <div class="container mx-auto px-4 sm:px-6">
+<section class="py-10 sm:py-12 lg:py-14 bg-blue-50">
+  <div class="container mx-auto px-4 sm:px-6 lg:px-10 xl:px-12 max-w-6xl xl:max-w-[1320px] 2xl:max-w-[1440px]">
     <div class="text-center mb-8 sm:mb-12">
       <h2 class="text-2xl sm:text-3xl lg:text-4xl font-bold mb-3 sm:mb-4">How It Works</h2>
       <p class="text-gray-600 text-sm sm:text-base">Simple, efficient, and hassle-free</p>
