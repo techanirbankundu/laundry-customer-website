@@ -1,14 +1,14 @@
 <?php include '../../includes/header.php'; ?>
 
 <section class="py-6 sm:py-8 lg:py-10 bg-gradient-to-b from-blue-50 to-white">
-  <div class="container mx-auto px-4 sm:px-6 lg:px-12 xl:px-2 max-w-6xl xl:max-w-[1360px] 2xl:max-w-[1440px] text-center">
+  <div class="container mx-auto px-4 sm:px-6 lg:px-8 xl:px-4 max-w-3xl lg:max-w-4xl xl:max-w-5xl 2xl:max-w-6xl text-center">
     <h1 class="text-2xl sm:text-3xl lg:text-3xl font-bold mb-1.5 sm:mb-3">Get in Touch</h1>
     <p class="text-gray-600 text-xs sm:text-sm lg:text-base">We're here to help with any questions or concerns</p>
   </div>
 </section>
 
 <section class="py-6 sm:py-8 lg:py-10">
-  <div class="container mx-auto px-4 sm:px-6 lg:px-12 xl:px-2 max-w-6xl xl:max-w-[1360px] 2xl:max-w-[1440px]">
+  <div class="container mx-auto px-4 sm:px-6 lg:px-8 xl:px-4 max-w-3xl lg:max-w-4xl xl:max-w-5xl 2xl:max-w-6xl">
     <div class="grid lg:grid-cols-2 gap-6 sm:gap-8 lg:gap-10 items-start">
 
       <!-- Contact Info -->
@@ -43,14 +43,6 @@
             </div>
           </div>
         </div>
-
-        <!-- Map Placeholder -->
-        <div class="bg-gray-200 w-full h-40 sm:h-52 lg:h-64 rounded-xl flex items-center justify-center text-gray-400">
-          <div class="text-center">
-            <i class="fas fa-map text-2xl sm:text-3xl lg:text-4xl mb-2"></i>
-            <p class="text-[11px] sm:text-xs">Location Map Preview</p>
-          </div>
-        </div>
       </div>
 
       <!-- Contact Form -->
@@ -83,12 +75,23 @@
   </div>
 </section>
 
+<!-- Map Placeholder as full-width section -->
+<section class="py-4 sm:py-6 lg:py-8">
+  <div class="container mx-auto px-4 sm:px-6 lg:px-8 xl:px-4 max-w-3xl lg:max-w-4xl xl:max-w-5xl 2xl:max-w-6xl">
+    <div class="w-full h-40 sm:h-52 lg:h-64 rounded-xl overflow-hidden shadow">
+      <iframe
+        src="https://www.google.com/maps?q=123+Laundry+Lane,+Clean+City,+ST+12345&output=embed"
+        width="100%" height="100%" style="border:0; min-height:160px; height:100%;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+    </div>
+  </div>
+</section>
+
 <script>
   document.querySelector('form').addEventListener('submit', function(e) {
     e.preventDefault();
     const btn = this.querySelector('button[type="submit"]');
     const originalText = btn.innerHTML;
-    
+
     btn.disabled = true;
     btn.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i> Sending...';
 
@@ -110,6 +113,42 @@
       });
     }, 1500);
   });
+
+  const SendMessage = async (formData) => {
+    try {
+      const response = await fetch('https://laundry-backend-two.vercel.app/api/v1/website/contact-us', {
+        method: 'POST',
+        body: formData
+      }).then(res => res.json()).then(data => {
+        if (data.success) {
+          Swal.fire({
+            icon: 'success',
+            title: 'Message Sent!',
+            text: 'Thank you for reaching out. Our team will get back to you shortly.',
+            confirmButtonColor: '#0ea5e9',
+            customClass: {
+              popup: 'rounded-3xl border border-gray-100 shadow-2xl',
+              confirmButton: 'rounded-xl font-bold px-8 py-3'
+            }          });
+        } else {
+          Swal.fire({
+            icon: 'error',
+            title: 'Error',
+            text: data.message || 'There was an issue sending your message. Please try again later.',
+            confirmButtonColor: '#0ea5e9',
+            customClass: {
+              popup: 'rounded-3xl border border-gray-100 shadow-2xl',
+              confirmButton: 'rounded-xl font-bold px-8 py-3'
+            }
+          });
+        }
+        return data;
+      });
+      return response;
+    } catch (error) {
+      console.error('Error sending message:', error);
+    }
+  }
 </script>
 
 <?php include '../../includes/footer.php'; ?>
