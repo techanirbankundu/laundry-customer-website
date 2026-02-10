@@ -87,7 +87,7 @@
 </section>
 
 <script>
-  document.querySelector('form').addEventListener('submit', function(e) {
+  document.querySelector('form').addEventListener('submit', async function(e) {
     e.preventDefault();
     const btn = this.querySelector('button[type="submit"]');
     const originalText = btn.innerHTML;
@@ -95,23 +95,14 @@
     btn.disabled = true;
     btn.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i> Sending...';
 
-    // Mock sending for now or replace with actual fetch to contact_process.php
-    setTimeout(() => {
-      Swal.fire({
-        icon: 'success',
-        title: 'Message Sent!',
-        text: 'Thank you for reaching out. Our team will get back to you shortly.',
-        confirmButtonColor: '#0ea5e9',
-        customClass: {
-          popup: 'rounded-3xl border border-gray-100 shadow-2xl',
-          confirmButton: 'rounded-xl font-bold px-8 py-3'
-        }
-      }).then(() => {
-        this.reset();
-        btn.disabled = false;
-        btn.innerHTML = originalText;
-      });
-    }, 1500);
+    // Collect form data
+    const formData = new FormData(this);
+    // Send to backend
+    await SendMessage(formData);
+
+    btn.disabled = false;
+    btn.innerHTML = originalText;
+    this.reset();
   });
 
   const SendMessage = async (formData) => {
@@ -129,7 +120,8 @@
             customClass: {
               popup: 'rounded-3xl border border-gray-100 shadow-2xl',
               confirmButton: 'rounded-xl font-bold px-8 py-3'
-            }          });
+            }
+          });
         } else {
           Swal.fire({
             icon: 'error',
@@ -147,6 +139,16 @@
       return response;
     } catch (error) {
       console.error('Error sending message:', error);
+      Swal.fire({
+        icon: 'error',
+        title: 'Error',
+        text: 'There was an issue sending your message. Please try again later.',
+        confirmButtonColor: '#0ea5e9',
+        customClass: {
+          popup: 'rounded-3xl border border-gray-100 shadow-2xl',
+          confirmButton: 'rounded-xl font-bold px-8 py-3'
+        }
+      });
     }
   }
 </script>
