@@ -48,7 +48,7 @@
       <!-- Contact Form -->
       <div class="bg-white p-5 sm:p-6 lg:p-8 rounded-2xl shadow-xl border border-gray-50">
         <h3 class="text-lg sm:text-xl font-bold mb-4 sm:mb-6">Send a Message</h3>
-        <form action="contact_process.php" method="POST">
+        <form method="POST">
           <div class="grid sm:grid-cols-2 gap-4 mb-4">
             <div>
               <label class="block mb-1 font-semibold text-[11px] sm:text-xs text-slate-600 uppercase tracking-wider">Name</label>
@@ -67,7 +67,7 @@
             <label class="block mb-1 font-semibold text-[11px] sm:text-xs text-slate-600 uppercase tracking-wider">Message</label>
             <textarea name="message" class="w-full px-3 py-2 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-sky-500 focus:border-transparent transition-all text-sm resize-none" rows="3" placeholder="Tell us more about your inquiry..." required></textarea>
           </div>
-          <button type="submit" class="btn btn-primary w-full py-2.5 text-sm sm:text-base">Send Message</button>
+          <button type="submit" class="btn btn-primary cursor-pointer w-full py-2.5 text-sm sm:text-base">Send Message</button>
         </form>
       </div>
 
@@ -97,15 +97,11 @@
 
     // Collect form data
     const formData = new FormData(this);
-    // Send to backend
-    await SendMessage(formData);
-
-    btn.disabled = false;
-    btn.innerHTML = originalText;
-    this.reset();
+    // Send to backend and handle UI reset inside SendMessage
+    await SendMessage(formData, this, btn, originalText);
   });
 
-  const SendMessage = async (formData) => {
+  const SendMessage = async (formData, formElem, btn, originalText) => {
     try {
       const response = await fetch('https://laundry-backend-two.vercel.app/api/v1/website/contact-us', {
         method: 'POST',
@@ -121,6 +117,10 @@
               popup: 'rounded-3xl border border-gray-100 shadow-2xl',
               confirmButton: 'rounded-xl font-bold px-8 py-3'
             }
+          }).then(() => {
+            formElem.reset();
+            btn.disabled = false;
+            btn.innerHTML = originalText;
           });
         } else {
           Swal.fire({
@@ -132,6 +132,9 @@
               popup: 'rounded-3xl border border-gray-100 shadow-2xl',
               confirmButton: 'rounded-xl font-bold px-8 py-3'
             }
+          }).then(() => {
+            btn.disabled = false;
+            btn.innerHTML = originalText;
           });
         }
         return data;
@@ -148,6 +151,9 @@
           popup: 'rounded-3xl border border-gray-100 shadow-2xl',
           confirmButton: 'rounded-xl font-bold px-8 py-3'
         }
+      }).then(() => {
+        btn.disabled = false;
+        btn.innerHTML = originalText;
       });
     }
   }
