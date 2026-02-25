@@ -109,7 +109,7 @@ include '../../includes/header.php'; ?>
       </div>
       <h3 class="text-2xl font-black text-slate-800 mb-2 tracking-tight">Verify Identity</h3>
       <p class="text-slate-400 text-xs font-medium leading-relaxed mb-8">We've sent a 6-digit code to your email.<br>Please enter it below to confirm your account.</p>
-      
+
       <div class="space-y-6">
         <div class="flex justify-center gap-2" id="otpInputGroup">
           <input type="text" maxlength="6" id="otpCode" class="w-full tracking-[0.5em] text-center text-2xl font-black py-4 bg-slate-50 border-2 border-slate-100 rounded-2xl focus:border-sky-500 focus:bg-white focus:ring-4 focus:ring-sky-500/10 transition-all outline-none text-slate-800 placeholder:text-slate-200" placeholder="000000">
@@ -121,7 +121,7 @@ include '../../includes/header.php'; ?>
         </button>
 
         <p class="text-[10px] font-black text-slate-300 uppercase tracking-widest">
-          Didn't receive it? 
+          Didn't receive it?
           <button onclick="resendOtp()" class="text-sky-500 hover:text-sky-600 ml-1 hover:underline active:opacity-70 transition-all">Resend Code</button>
         </p>
       </div>

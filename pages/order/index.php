@@ -529,6 +529,61 @@ include '../../includes/header.php'; ?>
       document.getElementById('review-address').innerText = addressInput.value || 'No address provided';
     };
 
+    const validateStepTwoBeforeContinue = () => {
+      const rows = itemsContainer.querySelectorAll('.item-row');
+
+      if (rows.length === 0) {
+        Swal.fire({
+          icon: 'warning',
+          title: 'Empty Basket',
+          text: 'Add at least one item to your basket.',
+          confirmButtonColor: '#0ea5e9',
+          toast: true,
+          position: 'top-end',
+          timer: 3000,
+          showConfirmButton: false
+        });
+        return false;
+      }
+
+      for (let i = 0; i < rows.length; i++) {
+        const row = rows[i];
+        const pSelect = row.querySelector('.productSelect');
+        const sSelect = row.querySelector('.serviceSelect');
+
+        if (pSelect.value && !sSelect.value) {
+          Swal.fire({
+            icon: 'warning',
+            title: 'Service Type Required',
+            text: `Please select a service type for item ${i + 1} to continue.`,
+            confirmButtonColor: '#0ea5e9',
+            toast: true,
+            position: 'top-end',
+            timer: 3000,
+            showConfirmButton: false
+          });
+          sSelect.focus();
+          return false;
+        }
+      }
+
+      if (orderItems.length === 0) {
+        Swal.fire({
+          icon: 'warning',
+          title: 'Empty Basket',
+          text: 'Add at least one item to your basket.',
+          confirmButtonColor: '#0ea5e9',
+          toast: true,
+          position: 'top-end',
+          timer: 3000,
+          showConfirmButton: false
+        });
+        return false;
+      }
+
+      return true;
+    };
+
     const goToStep = (step) => {
       if (step > currentStep) {
         if (currentStep === 1 && !addressInput.value.trim()) {
@@ -545,17 +600,7 @@ include '../../includes/header.php'; ?>
           addressInput.focus();
           return;
         }
-        if (currentStep === 2 && orderItems.length === 0) {
-          Swal.fire({
-            icon: 'warning',
-            title: 'Empty Basket',
-            text: 'Add at least one item to your basket.',
-            confirmButtonColor: '#0ea5e9',
-            toast: true,
-            position: 'top-end',
-            timer: 3000,
-            showConfirmButton: false
-          });
+        if (currentStep === 2 && !validateStepTwoBeforeContinue()) {
           return;
         }
       }

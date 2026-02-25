@@ -15,7 +15,7 @@ include '../../includes/header.php'; ?>
                 <i class="fas fa-user"></i>
               </div>
               <h2 id="profileName" class="text-xl font-bold text-slate-800">Loading...</h2>
-              
+
               <div id="verificationContainer" class="flex flex-col items-center">
                 <div id="verificationBadge" class="mt-1.5 inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[9px] font-bold uppercase tracking-wider">
                   <i class="fas fa-circle-notch fa-spin"></i> Checking status
@@ -25,7 +25,7 @@ include '../../includes/header.php'; ?>
                 </button>
               </div>
             </div>
-            
+
             <div class="space-y-3 border-t border-gray-100 pt-5">
               <div class="flex items-start gap-2.5">
                 <div class="mt-0.5 w-7 h-7 bg-sky-50 rounded-lg flex items-center justify-center text-sky-500 shrink-0">
@@ -46,7 +46,7 @@ include '../../includes/header.php'; ?>
                   <p id="profilePhone" class="text-slate-700 font-medium text-sm">Loading...</p>
                 </div>
               </div>
-              
+
               <div class="flex items-start gap-2.5">
                 <div class="mt-0.5 w-7 h-7 bg-sky-50 rounded-lg flex items-center justify-center text-sky-500 shrink-0">
                   <i class="fas fa-map-marker-alt text-[10px]"></i>
@@ -102,10 +102,10 @@ include '../../includes/header.php'; ?>
   <div class="flex items-center justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:p-0">
     <!-- Backdrop with stronger blur -->
     <div class="fixed inset-0 bg-slate-900/40 backdrop-blur-md transition-opacity" aria-hidden="true" onclick="closeModal()"></div>
-    
+
     <!-- This element is to trick the browser into centering the modal contents. -->
     <span class="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">&#8203;</span>
-    
+
     <!-- Modal Panel -->
     <div class="inline-block align-middle bg-white rounded-3xl text-left overflow-hidden shadow-2xl transform transition-all sm:my-8 sm:max-w-2xl sm:w-full relative z-10 border border-white/20">
       <div class="bg-white">
@@ -119,7 +119,7 @@ include '../../includes/header.php'; ?>
             <i class="fas fa-times text-lg"></i>
           </button>
         </div>
-        
+
         <!-- Modal Content -->
         <div id="modalContent" class="p-6 sm:p-8 max-h-[70vh] overflow-y-auto custom-scrollbar">
            <!-- Dynamically populated -->
@@ -146,7 +146,7 @@ include '../../includes/header.php'; ?>
       </div>
       <h3 class="text-2xl font-black text-slate-800 mb-2 tracking-tight">Verify Identity</h3>
       <p class="text-slate-400 text-xs font-medium leading-relaxed mb-8">We've sent a 6-digit code to your email.<br>Please enter it below to confirm your account.</p>
-      
+
       <div class="space-y-6">
         <div class="flex justify-center gap-2" id="otpInputGroup">
           <input type="text" maxlength="6" id="otpCode" class="w-full tracking-[0.5em] text-center text-2xl font-black py-4 bg-slate-50 border-2 border-slate-100 rounded-2xl focus:border-sky-500 focus:bg-white focus:ring-4 focus:ring-sky-500/10 transition-all outline-none text-slate-800 placeholder:text-slate-200" placeholder="000000">
@@ -158,7 +158,7 @@ include '../../includes/header.php'; ?>
         </button>
 
         <p class="text-[10px] font-black text-slate-300 uppercase tracking-widest">
-          Didn't receive it? 
+          Didn't receive it?
           <button onclick="resendOtp()" class="text-sky-500 hover:text-sky-600 ml-1 hover:underline active:opacity-70 transition-all">Resend Code</button>
         </p>
       </div>
@@ -188,7 +188,7 @@ include '../../includes/header.php'; ?>
       const verifyRes = await fetch('https://laundry-backend-two.vercel.app/api/v1/website/check-verification', fetchOptions);
       const verifyData = await verifyRes.json();
       const badge = document.getElementById('verificationBadge');
-      
+
       if (verifyData.isVerified) {
         badge.className = 'mt-2 inline-flex items-center gap-1.5 px-3 py-1 bg-emerald-100 text-emerald-600 rounded-full text-[10px] font-bold uppercase tracking-wider';
         badge.innerHTML = '<i class="fas fa-check-circle"></i> Verified';
@@ -283,10 +283,10 @@ include '../../includes/header.php'; ?>
     const content = document.getElementById('modalContent');
     const title = document.getElementById('modalOrderNumber');
     const date = document.getElementById('modalOrderDate');
-    
+
     modal.classList.remove('hidden');
     document.body.style.overflow = 'hidden';
-    
+
     content.innerHTML = `
       <div class="text-center py-10">
         <i class="fas fa-spinner fa-spin text-3xl text-sky-500 mb-2"></i>
@@ -307,7 +307,7 @@ include '../../includes/header.php'; ?>
       if (res.ok) {
         title.innerHTML = `${data.orderNumber} ${data.tagNumber ? `<span class="ml-2 text-xs bg-sky-100 text-sky-600 px-2 py-0.5 rounded font-mono">Tag: ${data.tagNumber}</span>` : ''}`;
         date.innerHTML = `<i class="far fa-calendar-alt mr-1"></i> ${new Date(data.createdAt).toLocaleString()}`;
-        
+
         content.innerHTML = `
           <div class="space-y-6">
             <!-- Items Section -->
@@ -366,7 +366,7 @@ include '../../includes/header.php'; ?>
                  <i class="fas fa-info-circle"></i> Status: ${data.status.replace(/_/g, ' ')}
                </div>
                <div class="px-4 py-2 ${parseFloat(data.paidAmount) >= parseFloat(data.totalAmount) ? 'bg-emerald-50 text-emerald-600' : 'bg-red-50 text-red-600'} rounded-lg text-xs font-bold flex items-center gap-2">
-                 <i class="fas ${parseFloat(data.paidAmount) >= parseFloat(data.totalAmount) ? 'fa-check-circle' : 'fa-clock'}"></i> 
+                 <i class="fas ${parseFloat(data.paidAmount) >= parseFloat(data.totalAmount) ? 'fa-check-circle' : 'fa-clock'}"></i>
                  ${parseFloat(data.paidAmount) >= parseFloat(data.totalAmount) ? 'Fully Paid' : 'Payment Pending: ₹' + (parseFloat(data.totalAmount) - parseFloat(data.paidAmount)).toFixed(2)}
                </div>
             </div>
@@ -431,7 +431,7 @@ include '../../includes/header.php'; ?>
   async function verifyOtp() {
     const otp = document.getElementById('otpCode').value;
     const btn = document.getElementById('verifyOtpBtn');
-    
+
     if (otp.length !== 6) {
       Swal.fire({ icon: 'warning', title: 'Invalid Code', text: 'Enter 6-digit OTP', toast: true, position: 'top-end', timer: 2000, showConfirmButton: false });
       return;
