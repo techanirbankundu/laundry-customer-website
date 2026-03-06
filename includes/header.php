@@ -73,6 +73,9 @@
             <a href="<?php echo $base_path; ?>/pages/order/index.php" class="font-medium hover:text-sky-500 transition-colors text-sm xl:text-base <?php echo strpos($current_page, '/order/') !== false ? 'text-sky-600 font-bold' : 'text-gray-600'; ?>">Order</a>
           </li>
           <li>
+            <a href="<?php echo $base_path; ?>/pages/track-order/index.php" class="font-medium hover:text-sky-500 transition-colors text-sm xl:text-base <?php echo strpos($current_page, '/track-order/') !== false ? 'text-sky-600 font-bold' : 'text-gray-600'; ?>">Track Order</a>
+          </li>
+          <li>
             <a href="<?php echo $base_path; ?>/pages/contact/index.php" class="font-medium hover:text-sky-500 transition-colors text-sm xl:text-base <?php echo strpos($current_page, '/contact/') !== false ? 'text-sky-600 font-bold' : 'text-gray-600'; ?>">Contact</a>
           </li>
           <li id="authLinkDesktop"><a href="<?php echo $base_path; ?>/pages/login/index.php" class="btn btn-primary"><?php echo isset($user['name']) ? 'Logout' : 'Login' ?></a></li>
@@ -94,6 +97,9 @@
           </li>
           <li>
             <a href="<?php echo $base_path; ?>/pages/order/index.php" class="block py-2.5 px-4 rounded-xl font-medium hover:bg-sky-50 hover:text-sky-500 transition-colors <?php echo strpos($current_page, '/order/') !== false ? 'text-sky-600 font-bold bg-sky-50' : 'text-gray-600'; ?>">Order</a>
+          </li>
+          <li>
+            <a href="<?php echo $base_path; ?>/pages/track-order/index.php" class="block py-2.5 px-4 rounded-xl font-medium hover:bg-sky-50 hover:text-sky-500 transition-colors <?php echo strpos($current_page, '/track-order/') !== false ? 'text-sky-600 font-bold bg-sky-50' : 'text-gray-600'; ?>">Track Order</a>
           </li>
           <li>
             <a href="<?php echo $base_path; ?>/pages/contact/index.php" class="block py-2.5 px-4 rounded-xl font-medium hover:bg-sky-50 hover:text-sky-500 transition-colors <?php echo strpos($current_page, '/contact/') !== false ? 'text-sky-600 font-bold bg-sky-50' : 'text-gray-600'; ?>">Contact</a>
@@ -138,7 +144,7 @@
               <a href="${base_path}/pages/profile/index.php" class="flex items-center gap-3 px-4 py-2.5 text-sm text-gray-700 hover:bg-sky-50 hover:text-sky-600 transition-colors">
                 <i class="fas fa-user-circle text-gray-400 w-4"></i> My Profile
               </a>
-              <a href="${base_path}/pages/profile/index.php" class="flex items-center gap-3 px-4 py-2.5 text-sm text-gray-700 hover:bg-sky-50 hover:text-sky-600 transition-colors">
+              <a href="${base_path}/pages/track-order/index.php" class="flex items-center gap-3 px-4 py-2.5 text-sm text-gray-700 hover:bg-sky-50 hover:text-sky-600 transition-colors">
                 <i class="fas fa-shopping-bag text-gray-400 w-4"></i> My Orders
               </a>
               <div class="h-px bg-gray-100 my-1 mx-4"></div>
@@ -183,8 +189,8 @@
                 <i class="fas fa-sign-out-alt"></i>
               </button>
             </div>
-            <a href="${base_path}/pages/profile/index.php" class="flex items-center justify-center gap-2 w-full py-2.5 bg-white rounded-xl text-xs font-bold text-sky-600 hover:text-sky-700 border border-sky-100 shadow-sm transition-all hover:-translate-y-0.5">
-              <i class="fas fa-user-circle text-sm"></i> View Profile & Orders
+            <a href="${base_path}/pages/track-order/index.php" class="flex items-center justify-center gap-2 w-full py-2.5 bg-white rounded-xl text-xs font-bold text-sky-600 hover:text-sky-700 border border-sky-100 shadow-sm transition-all hover:-translate-y-0.5">
+              <i class="fas fa-truck text-sm"></i> Track My Orders
             </a>
           </div>
         `;

@@ -101,6 +101,12 @@
         localStorage.setItem('accessToken', result.accessToken);
         localStorage.setItem('user', JSON.stringify(result.user));
 
+        const basePath = '<?php echo $base_path; ?>';
+        const params = new URLSearchParams(window.location.search);
+        const redirectParam = params.get('redirect') || '';
+        const redirectPath = decodeURIComponent(redirectParam);
+        const safeRedirect = redirectPath.startsWith(basePath + '/') ? redirectPath : `${basePath}/index.php`;
+
         Swal.fire({
           icon: 'success',
           title: 'Welcome Back!',
@@ -112,7 +118,7 @@
             popup: 'rounded-3xl border border-gray-100 shadow-2xl'
           }
         }).then(() => {
-          window.location.href = '<?php echo $base_path; ?>/index.php';
+          window.location.href = safeRedirect;
         });
       } else {
         Swal.fire({

@@ -480,7 +480,8 @@ include '../../includes/header.php'; ?>
         const priceEl = row.querySelector('.itemPrice');
 
         const sOption = sSelect.options[sSelect.selectedIndex];
-        const price = sOption ? parseFloat(sOption.getAttribute('data-price')) : 0;
+        const parsedPrice = sOption ? parseFloat(sOption.getAttribute('data-price')) : 0;
+        const price = Number.isFinite(parsedPrice) ? parsedPrice : 0;
         const rowTotal = price * qty;
 
         priceEl.innerText = `₹${rowTotal.toFixed(2)}`;
