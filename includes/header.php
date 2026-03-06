@@ -73,9 +73,6 @@
             <a href="<?php echo $base_path; ?>/pages/order/index.php" class="font-medium hover:text-sky-500 transition-colors text-sm xl:text-base <?php echo strpos($current_page, '/order/') !== false ? 'text-sky-600 font-bold' : 'text-gray-600'; ?>">Order</a>
           </li>
           <li>
-            <a href="<?php echo $base_path; ?>/pages/track-order/index.php" class="font-medium hover:text-sky-500 transition-colors text-sm xl:text-base <?php echo strpos($current_page, '/track-order/') !== false ? 'text-sky-600 font-bold' : 'text-gray-600'; ?>">Track Order</a>
-          </li>
-          <li>
             <a href="<?php echo $base_path; ?>/pages/contact/index.php" class="font-medium hover:text-sky-500 transition-colors text-sm xl:text-base <?php echo strpos($current_page, '/contact/') !== false ? 'text-sky-600 font-bold' : 'text-gray-600'; ?>">Contact</a>
           </li>
           <li id="authLinkDesktop"><a href="<?php echo $base_path; ?>/pages/login/index.php" class="btn btn-primary"><?php echo isset($user['name']) ? 'Logout' : 'Login' ?></a></li>
@@ -97,9 +94,6 @@
           </li>
           <li>
             <a href="<?php echo $base_path; ?>/pages/order/index.php" class="block py-2.5 px-4 rounded-xl font-medium hover:bg-sky-50 hover:text-sky-500 transition-colors <?php echo strpos($current_page, '/order/') !== false ? 'text-sky-600 font-bold bg-sky-50' : 'text-gray-600'; ?>">Order</a>
-          </li>
-          <li>
-            <a href="<?php echo $base_path; ?>/pages/track-order/index.php" class="block py-2.5 px-4 rounded-xl font-medium hover:bg-sky-50 hover:text-sky-500 transition-colors <?php echo strpos($current_page, '/track-order/') !== false ? 'text-sky-600 font-bold bg-sky-50' : 'text-gray-600'; ?>">Track Order</a>
           </li>
           <li>
             <a href="<?php echo $base_path; ?>/pages/contact/index.php" class="block py-2.5 px-4 rounded-xl font-medium hover:bg-sky-50 hover:text-sky-500 transition-colors <?php echo strpos($current_page, '/contact/') !== false ? 'text-sky-600 font-bold bg-sky-50' : 'text-gray-600'; ?>">Contact</a>
