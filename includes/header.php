@@ -138,7 +138,7 @@
               <a href="${base_path}/pages/profile/index.php" class="flex items-center gap-3 px-4 py-2.5 text-sm text-gray-700 hover:bg-sky-50 hover:text-sky-600 transition-colors">
                 <i class="fas fa-user-circle text-gray-400 w-4"></i> My Profile
               </a>
-              <a href="${base_path}/pages/track-order/index.php" class="flex items-center gap-3 px-4 py-2.5 text-sm text-gray-700 hover:bg-sky-50 hover:text-sky-600 transition-colors">
+              <a href="${base_path}/pages/my-order/index.php" class="flex items-center gap-3 px-4 py-2.5 text-sm text-gray-700 hover:bg-sky-50 hover:text-sky-600 transition-colors">
                 <i class="fas fa-shopping-bag text-gray-400 w-4"></i> My Orders
               </a>
               <div class="h-px bg-gray-100 my-1 mx-4"></div>
@@ -183,8 +183,8 @@
                 <i class="fas fa-sign-out-alt"></i>
               </button>
             </div>
-            <a href="${base_path}/pages/track-order/index.php" class="flex items-center justify-center gap-2 w-full py-2.5 bg-white rounded-xl text-xs font-bold text-sky-600 hover:text-sky-700 border border-sky-100 shadow-sm transition-all hover:-translate-y-0.5">
-              <i class="fas fa-truck text-sm"></i> Track My Orders
+            <a href="${base_path}/pages/my-order/index.php" class="flex items-center justify-center gap-2 w-full py-2.5 bg-white rounded-xl text-xs font-bold text-sky-600 hover:text-sky-700 border border-sky-100 shadow-sm transition-all hover:-translate-y-0.5">
+              <i class="fas fa-shopping-bag text-sm"></i> My Orders
             </a>
           </div>
         `;

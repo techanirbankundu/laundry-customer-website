@@ -11,7 +11,7 @@
               <li><a href="<?php echo $base_path; ?>/" class="text-slate-300 hover:text-sky-400 transition-colors font-medium">Home</a></li>
               <li><a href="<?php echo $base_path; ?>/pages/services/index.php" class="text-slate-300 hover:text-sky-400 transition-colors font-medium">Our Services</a></li>
               <li><a href="<?php echo $base_path; ?>/pages/order/index.php" class="text-slate-300 hover:text-sky-400 transition-colors font-medium">Place Order</a></li>
-              <li><a href="<?php echo $base_path; ?>/pages/track-order/index.php" class="text-slate-300 hover:text-sky-400 transition-colors font-medium">Track Order</a></li>
+              <li><a href="<?php echo $base_path; ?>/pages/my-order/index.php" class="text-slate-300 hover:text-sky-400 transition-colors font-medium">My Orders</a></li>
               <li><a href="<?php echo $base_path; ?>/pages/contact/index.php" class="text-slate-300 hover:text-sky-400 transition-colors font-medium">Support</a></li>
             </ul>
           </div>

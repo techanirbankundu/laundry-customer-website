@@ -683,7 +683,7 @@ include '../../includes/header.php'; ?>
             </div>
             <p class="text-slate-500 mb-12 text-xl max-w-lg mx-auto">Your request has been registered. We'll be in touch soon for collection.</p>
             <div class="flex flex-col sm:flex-row gap-6 justify-center">
-              <a href="../profile/index.php" class="bg-sky-500 hover:bg-sky-600 text-white px-12 py-5 rounded-2xl font-black shadow-xl shadow-sky-500/20">VIEW DASHBOARD</a>
+              <a href="../track-order/index.php" class="bg-sky-500 hover:bg-sky-600 text-white px-12 py-5 rounded-2xl font-black shadow-xl shadow-sky-500/20">VIEW MY ORDERS</a>
               <a href="../../index.php" class="p-5 text-slate-400 hover:text-slate-900 font-black uppercase tracking-widest text-xs">Home</a>
             </div>
           </div>
