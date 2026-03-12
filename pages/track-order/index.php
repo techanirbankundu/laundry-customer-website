@@ -155,16 +155,13 @@
   // ─── CASE 2: Guest + Order ID ────────────────────────────────
   async function renderGuestWithOrder() {
     try {
-      const response = await fetch(`${API_BASE}/orders/track/${orderIdParam}`);
+      const response = await fetch(`${API_BASE}/track/${orderIdParam}`);
 
       if (!response.ok) {
-        // If public endpoint fails, try another common pattern
-        const altResponse = await fetch(`${API_BASE}/orders/public/${orderIdParam}`);
-        if (!altResponse.ok) throw new Error('Order not found');
-        var order = await altResponse.json();
-      } else {
-        var order = await response.json();
+        throw new Error('Order not found');
       }
+      
+      const order = await response.json();
 
       pageContent.innerHTML = `
         <div class="animate-fade-in-up">
