@@ -132,6 +132,12 @@
       const payload = await response.json();
       const orders = normalizeOrderCollection(payload);
 
+      orders.sort((a, b) => {
+        const dateA = new Date(a.createdAt || a.created_at || 0);
+        const dateB = new Date(b.createdAt || b.created_at || 0);
+        return dateB - dateA;
+      });
+
       if (orders.length === 0) {
         ordersSubtext.textContent = 'You have no orders yet.';
         pageState.innerHTML = `
